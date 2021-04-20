@@ -11,12 +11,11 @@ object Utils {
    */
   def listBitToString(l: List[Bit]): String = {
     l match {
-      case Nil => ""
-      case Zero::tail => "0" + listBitToString(tail) // sans " "
-      case One::tail => "1" + listBitToString(tail)
+      case Nil          => ""
+      case One :: tail  => "1" + listBitToString(tail)
+      case Zero :: tail => "0" + listBitToString(tail)
     }
   }
-  
 
   /**
    * @param s une chaîne de caractères
@@ -44,6 +43,50 @@ object Utils {
   }
 
   /**
+   * Ecrit une chaîne de caractères dans un fichier.
+   * Le fichier est écrasé s'il était déjà existant.
+   *
+   * @param nom le nom du fichier dans lequel on écrit
+   * @param contenu la chaîne de caractères à écrire
+   *
+   * @note Le nom de fichier peut être indiqué de manière
+   *       relative à la racine du projet courant.
+   */
+  def ecrireFichier(nom: String, contenu: String): Unit = {
+    val writer = new PrintWriter(new File(nom))
+    writer.write(contenu)
+    writer.close()
+  }
+
+  /**
+   * @param s une chaîne de 0 et 1, encodage binaire 16 bits d'un caractère
+   * @return le caractère correspondant à s
+   */
+  def toChar(s: String): Char = {
+    Integer.parseInt(s, 2).toChar
+  }
+
+  /**
+   * @param c un caractère 0 ou 1
+   * @return le bit correspondant à c
+   */
+  def charToBit(c: Char): Bit = {
+    c match {
+      case '0' => Zero
+      case '1' => One
+      case _   => sys.error("Unknown bit character: " + c)
+    }
+  }
+
+  /**
+   * @param s une chaîne de 0 et 1 uniquement
+   * @return la liste de bits correspondant à s
+   */
+  def stringToListBit(s: String): List[Bit] = {
+    s.toList.map(charToBit)
+  }
+
+}
    * Ecrit une chaîne de caractères dans un fichier.
    * Le fichier est écrasé s'il était déjà existant.
    *
