@@ -13,14 +13,19 @@ object HuffmanApp1 extends App {
   /**
    * Arbre de code utilisé par l'application principale
    */
-  val h: Huffman =
-    Noeud(1.00, Noeud(0.43, Feuille(0.21, 'b'), 
-    Noeud(0.22, Feuille(0.09, 'e'), Noeud(0.13, Feuille(0.06, 'g'),
-    Feuille(0.07, 'f')))), Noeud(0.57, Feuille(0.25, 'a'),
-    Noeud(0.32, Feuille(0.14, 'd'),
-    Feuille(0.18, 'c'))))
+  val h: Huffman = Noeud(1, Feuille(0.45, 'a'),
+    Noeud(0.55, Feuille(0.19, 'r'),
+      Noeud(0.36, Noeud(0.18, Feuille(0.9, 'c'), Feuille(0.9, 'd')),
+        Feuille(0.18, 'b'))))
+        
+//  val h: Huffman =
+//    Noeud(1.00, Noeud(0.43, Feuille(0.21, 'b'), 
+//    Noeud(0.22, Feuille(0.09, 'e'), Noeud(0.13, Feuille(0.06, 'g'),
+//    Feuille(0.07, 'f')))), Noeud(0.57, Feuille(0.25, 'a'),
+//    Noeud(0.32, Feuille(0.14, 'd'),
+//    Feuille(0.18, 'c'))))
 
-    
+  
   /**
    * @return le test des fonctions encode et decode  
    */
@@ -44,6 +49,15 @@ object HuffmanApp1 extends App {
   
   testUnString()
   println("Again ? [Y/N]")
+  val user: Char = scala.io.StdIn.readChar()
+  user match{
+    case 'Y' | 'y' => testUnString()
+    case _ => println("Au revoir")
+  }
+        
+
+
+}
   val user: Char = scala.io.StdIn.readChar()
   user match{
     case 'Y' | 'y' => testUnString()
