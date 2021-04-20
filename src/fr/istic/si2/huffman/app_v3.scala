@@ -9,16 +9,10 @@ import Utils._
  */
 object HuffmanApp3 extends App {
 
-  val encMss: String = encode("merci monsieur")
-  println(encMss)
-  val decMss: String = decode(encMss)
-  println(decMss)
-  println()
-  println("-----------------------")
-  println()
   
+  // V3 avec une String
   /**
-   * @return le test des fonctions encode et decode  
+   * @return le test des fonctions encode et decode AppV3
    */
   def testAppv3(): Unit = {
     println("Chaîne à encoder ?")
@@ -42,8 +36,42 @@ object HuffmanApp3 extends App {
   val user: Char = scala.io.StdIn.readChar()
   user match{
     case 'Y' | 'y' => testAppv3()
-    case _ => println("Au revoir")
+    case _ => println("Au revoir") 
+              println()
   }
+  
+  // V3 avec lecture de .txt
+
+  val nomFichier: String = scala.io.StdIn.readLine("Entrer l'adresse du fichier : ")
+
+  print("Lecture du fichier \"" + nomFichier + "\" ... ")
+  val contenu: String = lireFichier(nomFichier)
+  println("Fait.")
+
+  val nomDeSortie: String = scala.io.StdIn.readLine("Entrer l'adresse du fichier de sortie : ")
+  val choix: String = scala.io.StdIn.readLine("Encoder (e) ou décoder (d) ? ")
+
+  choix match {
+    case "e" =>
+      print("Encodage ... ")
+      val contenuEnc: String = encode(contenu)
+      println("Fait.")
+      print("Ecriture du fichier dans \"" + nomDeSortie + "\" ... ")
+      ecrireFichier(nomDeSortie, contenuEnc)
+      println("Fait.")
+
+    case "d" =>
+      print("Decodage ... ")
+      val contenuDec: String = decode(contenu)
+      println("Fait.")
+      print("Ecriture du fichier dans \"" + nomDeSortie + "\" ... ")
+      ecrireFichier(nomDeSortie, contenuDec)
+      println("Fait.")
+
+    case _ => println("Choix invalide.")
+  }
+
+}
   
   //print(toChar("0000000001101001"))
 
