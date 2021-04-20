@@ -14,17 +14,32 @@ object HuffmanApp2 extends App {
    * Une liste de couples caractère / fréquence d'apparition
    * à utiliser par l'application principale.
    */
-  val lfreqs: List[(Char, Double)] =
-    ('a', 0.45)::('r', 0.19)::('c', 0.09)::('d', 0.09)::('b', 0.18)::Nil
+  val lfreqs: List[(Char, Double)] = List(
+    ('a', 0.45),
+    ('b', 0.18),
+    ('c', 0.09),
+    ('d', 0.09),
+    ('r', 0.19))
     
-  println(triSelonFreq(initHuffman(lfreqs)))
-  
+//  val lfreqs: List[(Char, Double)] =
+//    ('a', 0.45)::('r', 0.19)::('c', 0.09)::('d', 0.09)::('b', 0.18)::Nil
 
-  println("---------------")
+  print("Entrer l'adresse du fichier : ")
+  val nomFichier: String = scala.io.StdIn.readLine()
+  val contenu: String = lireFichier(nomFichier)
   
-  // TODO V2 - A vous de programmer l'application principale
-  val bBit: String = vers16Bits("b")
-  print(bBit + " :  ")
-  println(toChar(bBit))
-  println(toChar("0000000001100010"))
+  print("Construction de l'arbre de Huffman ... ")
+  val huffman: Huffman = codeHuffman(lfreqs)
+  // val huffman : Huffman = codeHuffman(analyseFrequences(contenu))
+  println("Fait.")
+  
+  print("Encodage ... ")
+  val encodage: String = listBitToString(encode(contenu, huffman))
+  println("Fait.")
+  
+  val nomDeSortie: String = nomFichier + ".encode.txt"
+  print("Ecriture du fichier dans \"" + nomDeSortie + "\" ... ")
+  ecrireFichier(nomDeSortie, encodage)
+  println("Fait.")
+
 }
