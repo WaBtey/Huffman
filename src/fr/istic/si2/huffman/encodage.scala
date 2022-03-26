@@ -83,7 +83,7 @@ object Encodage {
 
 
 
-
+  /**
    * Le fichier est écrasé s'il était déjà existant.
    *
    * @param nom le nom du fichier dans lequel on écrit
